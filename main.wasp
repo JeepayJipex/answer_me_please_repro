@@ -1,0 +1,36 @@
+app answer_me_please_repro {
+  wasp: {
+    version: "^0.15.2"
+  },
+  title: "answer_me_please_repro"
+}
+
+route RootRoute { path: "/", to: MainPage }
+page MainPage {
+  component: import { MainPage } from "@src/MainPage"
+}
+
+route QuestionPageRoute { path: "/question/:id", to: QuestionPage }
+page QuestionPage {
+  component: import { QuestionPage } from "@src/questions/pages/QuestionPage"
+}
+
+action createQuestion {
+ fn: import { createQuestion } from "@src/questions/actions",
+ entities: [Question]
+}
+
+query listQuestions {
+ fn: import { listQuestions } from "@src/questions/queries",
+ entities: [Question, Answer]
+}
+
+query getQuestion {
+ fn: import { getQuestion } from "@src/questions/queries",
+ entities: [Question, Answer]
+}
+
+action createAnswer {
+  fn: import {createAnswer} from "@src/answers/actions",
+  entities: [Answer]
+}
